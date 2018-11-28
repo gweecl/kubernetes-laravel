@@ -1,0 +1,22 @@
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "laravel.fullname" $ }}
+spec:
+{{- if .tls }}
+  tls:
+  - hosts:
+    - {{ .name }}
+    secretName: {{ .tlsSecret }}
+{{- end }}
+  rules:
+  - host: {{ .name }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ template "laravel.fullname" $ }}
+          servicePort: 80
+{{- end }}
+{{- end }}

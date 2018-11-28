@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     labels:
-        app: my-laravel-app
-    name: deployment-my-laravel-app
+        app: {{ template "laravel.fullname" . }}
+    name: {{ template "laravel.fullname" . }}
     namespace: default
 spec:
     replicas: 3
@@ -12,16 +12,16 @@ spec:
         type: RollingUpdate
     selector:
         matchLabels:
-            app: my-laravel-app
+            app: {{ template "laravel.fullname" . }}
     template:
         metadata:
             labels:
-                app: my-laravel-app
+                app: {{ template "laravel.fullname" . }}
         spec:
             containers:
                 -   
                     name: nginx
-                    image: {{ .Values.image.nginx }}
+                    image: {{ .Values.image.nginx.repository }}
                     ports:
                         - 
                             containerPort: 80
@@ -32,7 +32,7 @@ spec:
                             subPath: default-conf-file
                 -
                     name: php
-                    image: {{ .Values.image.phpLaravel }}
+                    image: {{ .Values.image.phpLaravel.repository }}
                     volumeMounts:
                         - 
                             name: volume-laravel

@@ -1,7 +1,4 @@
 .idea
 .DS_Store
 
-/docker/mysql/data
-/docker/mysql/dump
-/k8s/https
 /trash

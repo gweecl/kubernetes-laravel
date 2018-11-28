@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: configmap-laravel
+data:
+  env-file: |- 
+    {{- .Values.laravel.env | nindent 4 }}
