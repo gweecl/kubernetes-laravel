@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-my-laravel-app
+spec:
+  tls:
+  - secretName: secret-tls
+  rules:
+  - host: my-laravel-app.com
+    http:
+      paths:
+      - backend:
+          serviceName: service-my-laravel-app
+          servicePort: 80

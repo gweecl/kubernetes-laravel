@@ -1,0 +1,26 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    image: gcr.io/${PROJECT_ID}/nginx-image:${COMMIT_SHA}
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+    networks:
+      - default
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    image: gcr.io/${PROJECT_ID}/php-laravel-image:${COMMIT_SHA}
+    env_file:
+      - ./docker/app/laravel.local.env
+    networks:
+      - default
+
+networks:
+  default:
+

@@ -1,0 +1,5 @@
+version: "3"
+services:
+  php:
+    env_file:
+      - ./docker/app/laravel.dev.env

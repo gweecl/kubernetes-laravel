@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        app: my-laravel-app
+    name: deployment-my-laravel-app
+    namespace: default
+spec:
+    replicas: 3
+    revisionHistoryLimit: 1
+    strategy:
+        type: RollingUpdate
+    selector:
+        matchLabels:
+            app: my-laravel-app
+    template:
+        metadata:
+            labels:
+                app: my-laravel-app
+        spec:
+            containers:
+                -   
+                    name: nginx
+                    image: gcr.io/${PROJECT_ID}/nginx-image:${COMMIT_SHA}
+                    ports:
+                        - 
+                            containerPort: 80
+                    volumeMounts:
+                        - 
+                            name: volume-nginx
+                            mountPath: /etc/nginx/conf.d/default.conf
+                            subPath: default-conf-file
+                -
+                    name: php
+                    image: gcr.io/${PROJECT_ID}/php-laravel-image:${COMMIT_SHA}
+                    envFrom:
+                        - 
+                            configMapRef:
+                                name: configmap-laravel-env
+            volumes:
+                - 
+                    name: volume-nginx
+                    configMap:
+                        name: configmap-nginx
+                
