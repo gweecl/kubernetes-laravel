@@ -51,7 +51,8 @@ kubectl apply -f k8s/deployments/deployment.yaml
 
 // Services
 kubectl apply -f k8s/services/service.yaml
-// Load-balancer with Ingress
+
+// Expose and route your service with Ingress
 kubectl apply -f k8s/ingress/ingress.yaml
 ```
 
@@ -60,4 +61,6 @@ kubectl apply -f k8s/ingress/ingress.yaml
 
   * Configurations within the K8s - [Configure Access to Multiple Clusters or Namespaces](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
   * Configurations with different Google accounts or GCP Projects - [Managing gcloud Configurations](https://cloud.google.com/sdk/docs/configurations)
-
+  * Why use Ingress rather than native Load Balancer ? [A brief on the difference](https://stackoverflow.com/a/50285988/4778852). [Example 1](https://cloud.google.com/kubernetes-engine/docs/tutorials/http-balancer) and [Example 2](https://kubernetes.io/docs/concepts/services-networking/ingress/#simple-fanout)
+  * Run and expose multiple apps or services in single K8s cluster with Ingress - [Multiple name-based virtual hosting](https://kubernetes.io/docs/concepts/services-networking/ingress/#name-based-virtual-hosting)
+  * I would suggest to use managed service for database like GCP Cloud SQL or AWS RDS. [Why ?](https://patrobinson.github.io/2017/12/16/should-i-run-a-database-in-kubernetes/)
