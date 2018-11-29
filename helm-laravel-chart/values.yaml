@@ -15,8 +15,8 @@ image:
   phpLaravel:
     repository: gcr.io/${PROJECT_ID}/php-laravel-image:${COMMIT_SHA}
 
-# nameOverride: ""
-# fullnameOverride: ""
+nameOverride: ""
+fullnameOverride: ""
 
 ## Kubernetes svc configuration
 ##
@@ -102,9 +102,9 @@ ingress:
 #   tag: stable
 #   pullPolicy: IfNotPresent
 
-service:
-  type: ClusterIP
-  port: 80
+# service:
+#   type: ClusterIP
+#   port: 80
 
 # ingress:
 #   enabled: false

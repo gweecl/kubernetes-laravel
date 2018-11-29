@@ -4,14 +4,6 @@
 1. Setup for GKE (https://cloud.google.com/kubernetes-engine/docs/quickstart)
 2. Tutorial (https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app)
 
-> To switch context for k8s:
-> ```
-> // Get list of context info
-> kubectl config get-contexts
-> 
-> // Set context
-> kubectl config set-context [CONTEXT_NAME]
-> ```
 
 ## Deploy your images to GKE
 ```
@@ -62,3 +54,10 @@ kubectl apply -f k8s/services/service.yaml
 // Load-balancer with Ingress
 kubectl apply -f k8s/ingress/ingress.yaml
 ```
+
+
+## Links
+
+  * Configurations within the K8s - [Configure Access to Multiple Clusters or Namespaces](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
+  * Configurations with different Google accounts or GCP Projects - [Managing gcloud Configurations](https://cloud.google.com/sdk/docs/configurations)
+
