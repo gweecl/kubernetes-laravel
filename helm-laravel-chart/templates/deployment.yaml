@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
     labels:
         app: {{ template "laravel.fullname" . }}
+        # date: {{ .Release.Time.Seconds }}
     name: {{ template "laravel.fullname" . }}
     namespace: default
 spec:
@@ -24,7 +25,11 @@ spec:
                     image: {{ .Values.image.nginx.repository }}
                     ports:
                         - 
+                            name: http
                             containerPort: 80
+                        - 
+                            name: https
+                            containerPort: 443
                     volumeMounts:
                         - 
                             name: volume-nginx
@@ -33,6 +38,7 @@ spec:
                 -
                     name: php
                     image: {{ .Values.image.phpLaravel.repository }}
+                    imagePullPolicy: "Always"
                     volumeMounts:
                         - 
                             name: volume-laravel

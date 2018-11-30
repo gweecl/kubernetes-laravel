@@ -10,3 +10,4 @@
 * [Laravel + Kubernetes (Minikube)](labs/laravel-minikube.md)
 * [Laravel + GKE](labs/laravel-gke.md)
 * [Laravel + GKE + Helm](labs/laravel-gke-helm.md)
+* [Cleaning Up](labs/cleaning-up.md)

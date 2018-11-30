@@ -56,6 +56,9 @@ kubectl apply -f k8s/services/service.yaml
 kubectl apply -f k8s/ingress/ingress.yaml
 ```
 
+> `kubectl apply -f DEPLOYMENT_FILE` may not trigger pods update if the manifest files / image_name:tag have no changes.  
+>  Add or Remove `imagePullPolicy: "Always"` to K8s Deployment file and `kubectl apply` will force the image to be pulled and update the pods.
+
 
 ## Links
 
