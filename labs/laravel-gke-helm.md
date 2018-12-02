@@ -14,7 +14,7 @@ So I decided to give it a try on [Helm](https://helm.sh/).
 Basically, Helm uses [Go templates](https://godoc.org/text/template) for templating
 your manifest files (YAML). While ships with several built-in functions and other additonal features.  
 
-Then, helm process those template with the values spcified in `values.yaml`. 
+Helm process those template with the values spcified in `values.yaml`. 
 You can have multiple `values.yaml` file for different environments. 
 Just like the concept in [Docker Compose](https://docs.docker.com/compose/extends/#compose-documentation).  
   
@@ -25,7 +25,7 @@ Understand [three big concepts](https://docs.helm.sh/using_helm/#three-big-conce
 
 1. Install [Helm](https://docs.helm.sh/using_helm/#install-helm)
 
-2. For GKE, you need to grant your user the ability to create role. [Find out more](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control).
+2. To configure Role-Based Access Control in GKE, you need to grant your user the ability to create role. [Find out more](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control).
     ```
     kubectl create clusterrolebinding cluster-admin-binding \
         --clusterrole cluster-admin --user [USER_ACCOUNT]
@@ -90,9 +90,9 @@ Find out more on [Devloper Guide](https://docs.helm.sh/chart_template_guide/#the
     // To export as file
     helm upgrade --dry-run --debug -f myvalues.yaml -f override.yaml CHART_NAME CHART_FOLDER_PATH > example.yaml
     ```
-5. Example for this project.
-    * use `--set-file` for environment variables in Laravel.
-    * use `--set` to override the value of `image.nginx.repository` and `image.phpLaravel.repository` in `values.yaml`.
+5. Take a look for [example](/helm-laravel-chart) in this project.
+    * use `--set-file` for environment variables in Laravel. Which allow to reach external files outside chart directory. [Find out more](https://github.com/helm/helm/issues/4026).
+    * use `--set` to override the value in `values.yaml`.
     ```
     helm install --tiller-namespace default --namespace default \
     --set-file laravel.env=docker/app/laravel.prod.env \
@@ -112,13 +112,11 @@ Find out more on [Devloper Guide](https://docs.helm.sh/chart_template_guide/#the
     CHART_NAME ./helm-laravel-chart
     ```
 
-    > Using `--set-file` allow to reach external files outside chart directory. [Find out more](https://github.com/helm/helm/issues/4026).
-
     > `kubectl apply -f DEPLOYMENT_FILE` may not trigger pods update if the manifest files / image_name:tag have no changes.
     >  I supposed its not the same with Helm. But its not. :disappointed:  
     >  Add or Remove `imagePullPolicy: "Always"` to K8s Deployment file and `helm upgrade` will force the image to be pulled and update the pods.  
   
-    To verify the app is installed:
+5. To verify the app is installed:
     ```
     // DOMAIN_NAME in this project: my-laravel-app.com
     curl -H "host: DOMAIN_NAME" http://LOAD_BALANCER_IP
