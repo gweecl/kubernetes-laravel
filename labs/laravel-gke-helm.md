@@ -91,7 +91,7 @@ Find out more on [Devloper Guide](https://docs.helm.sh/chart_template_guide/#the
     helm upgrade --dry-run --debug -f myvalues.yaml -f override.yaml CHART_NAME CHART_FOLDER_PATH > example.yaml
     ```
 5. Take a look for [example](/helm-laravel-chart) in this project.
-    * use `--set-file` for environment variables in Laravel. Which allow to reach external files outside chart directory. [Find out more](https://github.com/helm/helm/issues/4026).
+    * use `--set-file` which allow to reach external files outside chart directory. [Find out more](https://github.com/helm/helm/issues/4026).
     * use `--set` to override the value in `values.yaml`.
     ```
     helm install --tiller-namespace default --namespace default \
@@ -112,7 +112,7 @@ Find out more on [Devloper Guide](https://docs.helm.sh/chart_template_guide/#the
     CHART_NAME ./helm-laravel-chart
     ```
 
-    > `kubectl apply -f DEPLOYMENT_FILE` may not trigger pods update if the manifest files / image_name:tag have no changes.
+    > `kubectl apply -f DEPLOYMENT_FILE` may not trigger pods update if the manifest files / image_name:tag have no changes.  
     >  I supposed its not the same with Helm. But its not. :disappointed:  
     >  Add or Remove `imagePullPolicy: "Always"` to K8s Deployment file and `helm upgrade` will force the image to be pulled and update the pods.  
   
