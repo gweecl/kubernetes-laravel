@@ -3,7 +3,7 @@
 ## What is Helm and Why ?
 
 * Building k8s cluster with declarative configuration files (YAML) is good. 
-* But how you rolling updates / rollback ? `kubectl apply` for every configuration files ? No.
+* But how you rolling updates / rollback ? `kubectl apply` for every configuration file. What ?!
 * Using environment variables to templatize it ? Not supported.
 
 There are discussion about these issues and suggestions on tools to templatize the manifest files:  
@@ -12,7 +12,7 @@ https://github.com/kubernetes/kubernetes/issues/23896#issuecomment-31354485
 So I decided to give it a try on [Helm](https://helm.sh/).  
   
 Basically, Helm uses [Go templates](https://godoc.org/text/template) for templating
-your manifest files (YAML). While ships with several built-in functions.  
+your manifest files (YAML). While ships with several built-in functions and other additonal features.  
 
 Then, helm process those template with the values spcified in `values.yaml`. 
 You can have multiple `values.yaml` file for different environments. 
@@ -52,6 +52,12 @@ Understand [three big concepts](https://docs.helm.sh/using_helm/#three-big-conce
     ```
     helm init --tiller-namespace default --namespace default
     ```
+
+    You can skip `--tiller-namespace default --namespace default` by set the tiller namespace in the shell
+    ```
+    export TILLER_NAMESPACE=default
+    ```
+
 
 ## Manage K8s with Helm
 
@@ -110,9 +116,13 @@ Find out more on [Devloper Guide](https://docs.helm.sh/chart_template_guide/#the
 
     > `kubectl apply -f DEPLOYMENT_FILE` may not trigger pods update if the manifest files / image_name:tag have no changes.
     >  I supposed its not the same with Helm. But its not. :disappointed:  
-    >  Add or Remove `imagePullPolicy: "Always"` to K8s Deployment file and `helm upgrade` will force the image to be pulled and update the pods.
+    >  Add or Remove `imagePullPolicy: "Always"` to K8s Deployment file and `helm upgrade` will force the image to be pulled and update the pods.  
   
-
+    To verify the app is installed:
+    ```
+    // DOMAIN_NAME in this project: my-laravel-app.com
+    curl -H "host: DOMAIN_NAME" http://LOAD_BALANCER_IP
+    ```
 
 
 ## Links

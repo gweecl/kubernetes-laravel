@@ -1,4 +1,4 @@
-# Built and run Laravel with Docker
+# Build and run Laravel with Docker
 
 ## Build images
 

@@ -20,3 +20,8 @@ Clear contexts in `kubectl`.
 ```
 kubectl config unset contexts.CONTEXT_NAME
 ```
+
+### Helm
+```
+helm del --purge CHART_NAME
+```
