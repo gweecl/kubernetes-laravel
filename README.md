@@ -1,4 +1,4 @@
-# Containerized Laravel Application
+# Laravel with Google Kubernetes Engine
 
 ## Prerequisites
 * [Docker](https://www.docker.com/get-started)
